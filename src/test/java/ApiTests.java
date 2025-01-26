@@ -12,7 +12,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class ApiTests {
 
     public static final String BASE_URL = "https://reqres.in";
-    public static final String API  = "/api";
+    public static final String API = "/api";
     public static final String USERS = "/users";
     private String userId = "2";
     private String wrongUserId = "99999";
@@ -47,7 +47,7 @@ public class ApiTests {
         given()
                 .log().uri()
                 .when()
-                .get(USERS +"/" + userId)
+                .get(USERS + "/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -68,7 +68,7 @@ public class ApiTests {
         given()
                 .log().uri()
                 .when()
-                .get(USERS +"/" + wrongUserId)
+                .get(USERS + "/" + wrongUserId)
                 .then()
                 .log().status()
                 .log().body()
@@ -103,7 +103,7 @@ public class ApiTests {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                .put(USERS +"/" + userId)
+                .put(USERS + "/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -125,7 +125,7 @@ public class ApiTests {
         given()
                 .log().uri()
                 .when()
-                .delete(USERS +"/" + userId)
+                .delete(USERS + "/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -161,7 +161,7 @@ public class ApiTests {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                .post(USERS +"/" + userId)
+                .post(USERS + "/" + userId)
                 .then()
                 .log().status()
                 .log().body()
