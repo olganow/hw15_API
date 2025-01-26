@@ -1,14 +1,27 @@
+import io.restassured.RestAssured;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 import static io.restassured.http.ContentType.JSON;
-import static io.restassured.http.ContentType.XML;
 import static org.hamcrest.Matchers.*;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 
 public class ApiTests {
+
+    public static final String BASE_URL = "https://reqres.in";
+    public static final String API  = "/api";
+    public static final String USERS = "/users";
+    private String userId = "2";
+    private String wrongUserId = "99999";
+
+    @BeforeAll
+    public static void setUp() {
+        RestAssured.baseURI = BASE_URL;
+        RestAssured.basePath = API;
+    }
  /*
     1. Make request (GET) to https://reqres.in/api/users/2
         with empty body
@@ -34,7 +47,7 @@ public class ApiTests {
         given()
                 .log().uri()
                 .when()
-                .get("https://reqres.in/api/users/2")
+                .get(USERS +"/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -51,10 +64,11 @@ public class ApiTests {
     @Test
     @DisplayName("Get Single User by wrong ID")
     void getSingleUserByWrongIdTest() {
+
         given()
                 .log().uri()
                 .when()
-                .get("https://reqres.in/api/users/999")
+                .get(USERS +"/" + wrongUserId)
                 .then()
                 .log().status()
                 .log().body()
@@ -89,7 +103,7 @@ public class ApiTests {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                .put("https://reqres.in/api/users/2")
+                .put(USERS +"/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -111,7 +125,7 @@ public class ApiTests {
         given()
                 .log().uri()
                 .when()
-                .delete("https://reqres.in/api/users/2")
+                .delete(USERS +"/" + userId)
                 .then()
                 .log().status()
                 .log().body()
@@ -147,7 +161,7 @@ public class ApiTests {
                 .contentType(JSON)
                 .log().uri()
                 .when()
-                .post("https://reqres.in/api/users/2")
+                .post(USERS +"/" + userId)
                 .then()
                 .log().status()
                 .log().body()
